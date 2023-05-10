@@ -103,7 +103,7 @@ void printGrid(char grid[GRID_SIZE][GRID_SIZE], POSITION *gridPos)
     }
     printf("\n");
 }
-
+// ak je lodka polozena na gride vrati 0, ak nie vrati 1
 int placeBoat(LOD *boatToPlace, POSITION wantedBridgePos, char orientation ,char grid[GRID_SIZE][GRID_SIZE])
 {
     //cislovanie hracej plochy je na nultom riadku a nultom stlpci cize cords treba o 1 posunut
