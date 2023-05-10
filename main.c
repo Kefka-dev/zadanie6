@@ -1,10 +1,13 @@
 #include <stdio.h>
 #include <ctype.h>
+#include <stdlib.h>
+#include <time.h>
 
 #define GRID_SIZE 11
 #define SHIP_COUNT 5
 #define TRUE 1
 #define FALSE 0
+#define FAIL 1
 typedef struct position
 {
     int x;
@@ -175,7 +178,36 @@ int placeBoat(LOD *boatToPlace, POSITION wantedBridgePos, char orientation ,char
 
     return 0;
 }
+// nahodne rozlozi lodicky po gride
+void rndBoatSpread(LOD boatsToSpread[SHIP_COUNT], char grid[GRID_SIZE][GRID_SIZE])
+{
+    srand(time(NULL));
+    POSITION rndPos;
+    int coinflip;
+    char orientation;
+    for (int ship = 0; ship < SHIP_COUNT; ship++)
+    {
+        rndPos.x = rand()%10;
+        rndPos.y = rand()%10;
+        coinflip = rand()%2;
 
+        if (coinflip == 1)
+        {
+            orientation = 'h';
+        }
+        else
+        {
+            orientation = 'v';
+        }
+        
+        if(placeBoat(&boatsToSpread[ship], rndPos, orientation, grid) == FAIL)
+        {
+            ship--;
+        }
+    }
+    
+    
+}
 LOD lodeHrac1[SHIP_COUNT]= {
     {"Cln",2, FALSE, '1'},
     {"Ponorka", 3, FALSE, '2'},
