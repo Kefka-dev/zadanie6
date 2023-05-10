@@ -237,12 +237,15 @@ int main()
     cursorPosition.x=1;
     cursorPosition.y=2;
     //polozenie lodky
-    POSITION tuDajLod = {1,1};
-    POSITION tuDajLod2 = {4,5};
-    placeBoat(&lodeHrac1[1], tuDajLod, 'h', player1grid);
-    placeBoat(&lodeHrac1[4], tuDajLod2, 'h', player1grid);
+    // POSITION tuDajLod = {7,2};
+    // POSITION tuDajLod2 = {7,4};
+    // placeBoat(&lodeHrac1[2], tuDajLod2, 'h', player1grid);
+    // placeBoat(&lodeHrac1[1], tuDajLod, 'v', player1grid);
+    rndBoatSpread(lodeHrac1, player1grid);
     printGrid(player1grid, &cursorPosition);
 
+    printf("pozicia lode %s: %d, %d", lodeHrac1[0].name, lodeHrac1[0].bridgePosition.x-1, lodeHrac1[0].bridgePosition.y-1);
+    //rndBoatSpread();
     // cursorPosition.x=61;
     // cursorPosition.y=1;
     // printGrid(player2grid, &cursorPosition);
