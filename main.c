@@ -18,7 +18,7 @@ typedef struct lod
 {
     char name[50];
     int lenght;
-    int sank;
+    int liveTiles;
     char displayChar;
     //bridge = najlavejsi alebo najvissi bod dole
     POSITION bridgePosition;
@@ -208,20 +208,22 @@ void rndBoatSpread(LOD boatsToSpread[SHIP_COUNT], char grid[GRID_SIZE][GRID_SIZE
     
     
 }
+
+
 LOD lodeHrac1[SHIP_COUNT]= {
-    {"Cln",2, FALSE, '1'},
-    {"Ponorka", 3, FALSE, '2'},
-    {"Torpedoborec", 3, FALSE, '3'},
-    {"Kriznik", 4, FALSE, '4'},
-    {"LietadlovaLod", 5, FALSE, '5'}
+    {"Cln",2, 2, '0'},
+    {"Ponorka", 3, 3, '1'},
+    {"Torpedoborec", 3, 3, '2'},
+    {"Kriznik", 4, 3, '3'},
+    {"LietadlovaLod", 5, 3, '4'}
 };
 
 LOD lodeHrac2[SHIP_COUNT]= {
-    {"Cln",2, FALSE, '1'},
-    {"Ponorka", 3, FALSE, '2'},
-    {"Torpedoborec", 3, FALSE, '3'},
-    {"Kriznik", 4, FALSE, '4'},
-    {"LietadlovaLod", 5, FALSE, '5'}
+    {"Cln",2, 2, '0'},
+    {"Ponorka", 3, 3, '1'},
+    {"Torpedoborec", 3, 3, '2'},
+    {"Kriznik", 4, 4, '3'},
+    {"LietadlovaLod", 5, 5, '4'}
 };
 
 int main()
