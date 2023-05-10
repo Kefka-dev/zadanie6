@@ -103,20 +103,28 @@ void printGrid(char grid[GRID_SIZE][GRID_SIZE], POSITION *gridPos)
 
 int placeBoat(LOD *boatToPlace, POSITION wantedBridgePos, char orientation ,char grid[GRID_SIZE][GRID_SIZE])
 {
-    // if (orientation != 'h' || orientation != 'v')
-    // {
-    //     return 1;
-    // }
+    //cislovanie hracej plochy je na nultom riadku a nultom stlpci cize cords treba o 1 posunut
+    wantedBridgePos.x++;
+    wantedBridgePos.y++;
+
     if(orientation == 'h')
     {
-        //cislovanie hracej plochy je na nultom riadku a nultom stlpci cize cords treba o 1 posunut
-        wantedBridgePos.x++;
-        wantedBridgePos.y++;
+        //chceck ci sa lod zmesti na sirku, cize poloha bridge+dlzka lode
         if ( (wantedBridgePos.x - 1 + (*boatToPlace).lenght) < GRID_SIZE)
         {
 
             (*boatToPlace).bridgePosition = wantedBridgePos;
 
+            //check ci sa tam lod zmesti(ci tam uz nie je ina)
+            for (int piece = 0; piece < (*boatToPlace).lenght; piece++)
+            {
+                if (grid[(*boatToPlace).bridgePosition.y][(*boatToPlace).bridgePosition.x + piece] != '~')
+                {
+                    return 1;
+                }
+            }
+ 
+            //samotne umiestnenie lode na grid
             for (int piece = 0; piece < (*boatToPlace).lenght; piece++)
             {
                 grid[(*boatToPlace).bridgePosition.y][(*boatToPlace).bridgePosition.x + piece] = (*boatToPlace).displayChar;
@@ -125,10 +133,44 @@ int placeBoat(LOD *boatToPlace, POSITION wantedBridgePos, char orientation ,char
         }
         else
         {
+            //fprintf(stderr, "nezmesti sa\n");
             return 1;
-            printf("nezmesti sa\n");
+        }
+    }
+    else if (orientation == 'v')
+    {
+        //chceck ci sa lod zmesti na vysku, cize poloha bridge+dlzka lode
+        if ((wantedBridgePos.y -1 + (*boatToPlace).lenght) < GRID_SIZE)
+        {
+            (*boatToPlace).bridgePosition = wantedBridgePos;    
+            
+            //check ci sa tam lod zmesti(ci tam uz nie je ina)
+            for (int piece = 0; piece < (*boatToPlace).lenght; piece++)
+            {
+                if (grid[(*boatToPlace).bridgePosition.y+piece][(*boatToPlace).bridgePosition.x] != '~')
+                {
+                    return 1;
+                }
+            }
+            
+            //samotne vertikalne umiestnenie lode na grid
+            for (int piece = 0; piece < (*boatToPlace).lenght; piece++)
+            {
+                grid[(*boatToPlace).bridgePosition.y+piece][(*boatToPlace).bridgePosition.x] = (*boatToPlace).displayChar;
+            }
+            
+        }
+        else
+        {
+            //fprintf(stderr, "nezmesti sa\n");
+            return 1;
         }
         
+    }
+    else
+    {
+        //nespravny znak pre orientaciu, musi byt 'h' alebo 'v'
+        return 1;
     }
 
     return 0;
