@@ -188,7 +188,7 @@ int placeBoat(LOD *boatToPlace, POSITION wantedBridgePos, char orientation ,char
     if(orientation == 'h')
     {
         //chceck ci sa lod zmesti na sirku, cize poloha bridge+dlzka lode
-        if ( (wantedBridgePos.x - 1 + (*boatToPlace).lenght) < GRID_SIZE)
+        if ( ((wantedBridgePos.x - 1 + (*boatToPlace).lenght) < GRID_SIZE ) && wantedBridgePos.x >=1)
         {
 
             (*boatToPlace).bridgePosition = wantedBridgePos;
@@ -218,7 +218,7 @@ int placeBoat(LOD *boatToPlace, POSITION wantedBridgePos, char orientation ,char
     else if (orientation == 'v')
     {
         //chceck ci sa lod zmesti na vysku, cize poloha bridge+dlzka lode
-        if ((wantedBridgePos.y -1 + (*boatToPlace).lenght) < GRID_SIZE)
+        if (((wantedBridgePos.y -1 + (*boatToPlace).lenght) < GRID_SIZE ) && wantedBridgePos.y >=1)
         {
             (*boatToPlace).bridgePosition = wantedBridgePos;    
             
