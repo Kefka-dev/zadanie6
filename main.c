@@ -351,6 +351,21 @@ int destroyShip(LOD ships[SHIP_COUNT])
     
     return -1;
 }
+//player boats array
+LOD lodeHrac[SHIP_COUNT]= {
+    {"PatrolBoat",2, 2, FALSE, '0'},
+    {"Submarine", 3, 3, FALSE, '1'},
+    {"Destroyer", 3, 3, FALSE, '2'},
+    {"Battleship", 4, 4, FALSE, '3'},
+    {"Carrier", 5, 5, FALSE, '4'}
+};
+//computer (insane AI) ship array
+LOD lodeComputer[SHIP_COUNT]= {
+    {"PatrolBoat",2, 2, FALSE, '0'},
+    {"Submarine", 3, 3, FALSE, '1'},
+    {"Destroyer", 3, 3, FALSE, '2'},
+    {"Battleship", 4, 4, FALSE, '3'},
+    {"Carrier", 5, 5, FALSE, '4'}
 };
 
 int main()
