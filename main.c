@@ -24,6 +24,7 @@ typedef struct lod
     char name[50];
     int lenght;
     int liveTiles;
+    int destroyed;
     char displayChar;
     //bridge = najlavejsi alebo najvissi bod dole
     POSITION bridgePosition;
@@ -336,6 +337,20 @@ int shoot(char grid[GRID_SIZE][GRID_SIZE], POSITION target, LOD ship[SHIP_COUNT]
     
 }
 
+//if ship destroyed return ship index, else -1
+int destroyShip(LOD ships[SHIP_COUNT])
+{
+    for (int ship = 0; ship < SHIP_COUNT; ship++)
+    {
+        if(ships[ship].destroyed == FALSE && ships[ship].liveTiles == 0)
+        {
+            ships[ship].destroyed = TRUE;
+            return ship;
+        }
+    }
+    
+    return -1;
+}
 };
 
 int main()
