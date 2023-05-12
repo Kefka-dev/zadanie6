@@ -284,14 +284,23 @@ void rndBoatSpread(LOD boatsToSpread[SHIP_COUNT], char grid[GRID_SIZE][GRID_SIZE
     
 }
 
+//na zaklade znaku ktoru lod trafil jej odrata 1 zivot, lod ma zivotou podla dlzky. tj. lod je dlha 5 => ma 5 zivotov
+//RETURN 1 ak to bol posledny zivot lode, inac RETURN 0
+int dmgShip(LOD ship[SHIP_COUNT], char shipIdentifier)
+{
+    int ShipCheck;
+    //prevod charakteru cisla na integer
+    ShipCheck = shipIdentifier - '0';
+    ship[ShipCheck].liveTiles--;
 
-LOD lodeHrac1[SHIP_COUNT]= {
-    {"Cln",2, 2, '0'},
-    {"Ponorka", 3, 3, '1'},
-    {"Torpedoborec", 3, 3, '2'},
-    {"Kriznik", 4, 3, '3'},
-    {"LietadlovaLod", 5, 3, '4'}
-};
+    if (ship[ShipCheck].liveTiles == 0)
+    {
+        return 1;
+    }
+    return 0;
+    // printf("test konverzu %d", ShipCheck);
+    
+}
 
 LOD lodeHrac2[SHIP_COUNT]= {
     {"Cln",2, 2, '0'},
