@@ -395,6 +395,32 @@ int main()
     char orientation;
     
     //printf("%s", lodeHrac1[0].name);
+    //boat spread by player
+    for (int ship = 0; ship < SHIP_COUNT; ship++)
+    {
+        setCursorPos(1,MAIN_IO_LINE);
+        clearLine();
+        printf("Set boat cords (left/top most part of the boat) in format x,y :");
+        scanf("%d,%d", &userSetPos.x, &userSetPos.y);
+        
+        setCursorPos(1,ERROR_LINE);
+        clearLine();
+        
+        setCursorPos(1,MAIN_IO_LINE);
+        clearLine();
+        printf("Set boat orientation (horizontal/vertical) h/v:");
+        scanf(" %c", &orientation);
+
+        //setCursorPos(1,ERROR_LINE);
+        if(placeBoat(&lodeHrac[ship], userSetPos, orientation, playerGrid) == FAIL)
+        {
+            ship--;
+            setCursorPos(1,ERROR_LINE);
+            printf("You've used wrong format, or the ship doent't fit there. Try again!");
+        }
+        printGrid(playerGrid, playerGridPosition);
+    }
+
 
     return 0;
 }
