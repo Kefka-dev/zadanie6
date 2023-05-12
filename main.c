@@ -91,20 +91,32 @@ void fillWithWater(char grid[GRID_SIZE][GRID_SIZE])
 }
 
 //vypise grid
-void printGrid(char grid[GRID_SIZE][GRID_SIZE], POSITION *gridPos)
+void printGrid(char grid[GRID_SIZE][GRID_SIZE], /*POSITION *gridPos*/ POSITION gridPos)
 {
 
     for (int rows = 0; rows < GRID_SIZE; rows++)
     {
-        setCursorPos((*gridPos).x, (*gridPos).y);
+        // setCursorPos((*gridPos).x, (*gridPos).y);
+        setCursorPos(gridPos.x, gridPos.y);
         for (int cols = 0; cols < GRID_SIZE; cols++)
         {
             if(rows >0 && cols>0)
             {
-               blue();
                if (isdigit(grid[rows][cols]) != FALSE)
                {
                     green();
+               }
+               else if (grid[rows][cols] == '-')
+               {
+                    white();
+               }
+               else if (grid[rows][cols] == 'X')
+               {
+                    red();
+               }
+               else
+               {
+                blue();
                }
                
             }
@@ -114,7 +126,12 @@ void printGrid(char grid[GRID_SIZE][GRID_SIZE], POSITION *gridPos)
             printf("[%c]", grid[rows][cols]);
         }
         reset();
-        (*gridPos).y++;
+        // (*gridPos).y++;
+        gridPos.y++;
+    }
+    printf("\n");
+}
+
     }
     printf("\n");
 }
