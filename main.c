@@ -59,6 +59,13 @@ void clearTerminal()
     printf("\033[H\033[J");
 }
 
+//clears the line from cursor position to the end of the screen
+void clearLine()
+{
+    printf("\033[2K");
+    fflush(stdout);
+}
+
 //naplni grid vodou
 void fillWithWater(char grid[GRID_SIZE][GRID_SIZE])
 {
