@@ -302,12 +302,40 @@ int dmgShip(LOD ship[SHIP_COUNT], char shipIdentifier)
     
 }
 
-LOD lodeHrac2[SHIP_COUNT]= {
-    {"Cln",2, 2, '0'},
-    {"Ponorka", 3, 3, '1'},
-    {"Torpedoborec", 3, 3, '2'},
-    {"Kriznik", 4, 4, '3'},
-    {"LietadlovaLod", 5, 5, '4'}
+//vystreli na grid, RETURN -1 ak je to mimo gridu, RETURN 1 ak trafi lod, RETURN 0 ak netrafi, RETURN 2 ak bola znicena cela lod
+int shoot(char grid[GRID_SIZE][GRID_SIZE], POSITION target, LOD ship[SHIP_COUNT])
+{
+    //cislovanie hracej plochy je na nultom riadku a nultom stlpci cize cords treba o 1 posunut
+    target.x++;
+    target.y++;
+    int destroyedBoat;
+    if((target.x >=1 && target.y >=1) && (target.x < 11 && target.y < 11))
+    {
+        if(grid[target.y][target.x] == '~')
+        {
+            grid[target.y][target.x] = '-';
+            return 0;
+        }
+        else if(isdigit(grid[target.y][target.x]) != FALSE)
+        {
+            destroyedBoat = dmgShip(ship, grid[target.y][target.x]);
+            grid [target.y][target.x] = 'X';
+            if (destroyedBoat == TRUE)
+            {
+                return 2;
+            }
+            
+            return 1;
+        }
+
+    }
+    else
+    {
+        return -1;
+    }
+    
+}
+
 };
 
 int main()
