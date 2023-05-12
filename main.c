@@ -254,10 +254,12 @@ int placeBoat(LOD *boatToPlace, POSITION wantedBridgePos, char orientation ,char
 
     return 0;
 }
+
 // nahodne rozlozi lodicky po gride
 void rndBoatSpread(LOD boatsToSpread[SHIP_COUNT], char grid[GRID_SIZE][GRID_SIZE])
 {
     srand(time(NULL));
+    // srand(2);
     POSITION rndPos;
     int coinflip;
     char orientation;
@@ -394,7 +396,6 @@ int main()
     POSITION userSetPos, computerSetPos;
     char orientation;
     
-    //printf("%s", lodeHrac1[0].name);
     //boat spread by player
     for (int ship = 0; ship < SHIP_COUNT; ship++)
     {
