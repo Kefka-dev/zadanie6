@@ -421,6 +421,82 @@ int main()
         printGrid(playerGrid, playerGridPosition);
     }
 
+    int alivePlayerShips = SHIP_COUNT;
+    int aliveComputerShips = SHIP_COUNT;
+    int destroyedShipIndex, shootStatus;
+    while (alivePlayerShips != 0 && aliveComputerShips != 0 )
+    {
+        //------------------player turn------------------------//
 
+        //main input line
+        setCursorPos(1,MAIN_IO_LINE);
+        clearLine();
+
+        printf("Set coords for attack(x,y):");
+        scanf("%d,%d", &userSetPos.x, &userSetPos.y);
+
+        //error line
+        setCursorPos(1,ERROR_LINE);
+        clearLine();
+
+        shootStatus = shoot(computerGrid, userSetPos, lodeComputer);
+        //------ship was destroyed
+        if( shootStatus == SHIP_DESTROYED)
+        {
+            destroyedShipIndex = destroyShip(lodeComputer);
+            setCursorPos(1,SHIP_STATUS_LINE);
+            clearLine();
+            printf("Enemy %s has been destroyed!", lodeComputer[destroyedShipIndex].name);
+            aliveComputerShips--;
+            if (aliveComputerShips == 0)
+            {
+                setCursorPos(1,SHIP_STATUS_LINE);
+                clearLine();
+                printf("Player WINS!\n");
+                break;
+            }
+            
+        }
+        else if(shootStatus == -1)
+        {
+            setCursorPos(1,SHIP_STATUS_LINE);
+            clearLine();
+            printf("You've missed the grid maan.");
+        }
+        printGridWithFog(computerGrid, computerGridPosition);
+        //-------------computer turn-------------------//
+        setCursorPos(1,ERROR_LINE);
+        clearLine();
+        
+        setCursorPos(1,MAIN_IO_LINE);
+        clearLine();
+
+        setCursorPos(1,ERROR_LINE);
+        //insane AI algorithm
+        computerSetPos.x = rand()%10;
+        computerSetPos.y = rand()%10;
+        //end of insane AI
+        printf("Computer shoots at %d,%d", computerSetPos.x, computerSetPos.y);
+        //AI destroys a ship (probably will never happen)
+        if(shoot(playerGrid, computerSetPos, lodeHrac) == SHIP_DESTROYED)
+        {
+            destroyedShipIndex = destroyShip(lodeHrac);
+            setCursorPos(1,SHIP_STATUS_LINE);
+            clearLine();
+            printf("Your %s has been destroyed!", lodeHrac[destroyedShipIndex].name);
+            alivePlayerShips--;
+            if (alivePlayerShips == 0)
+            {
+                setCursorPos(1,SHIP_STATUS_LINE+1);
+                clearLine();
+                printf("Computer WINS!\n");
+                break;
+            }
+        }
+        printGrid(playerGrid,playerGridPosition);
+        //----------------------------------------------------//
+    }
+    printGrid(playerGrid,playerGridPosition);
+    printGrid(computerGrid, computerGridPosition);
     return 0;
 }
