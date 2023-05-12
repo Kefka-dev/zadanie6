@@ -44,7 +44,10 @@ void blue() {
 void yellow() {
     printf("\033[33m");
 }
-//nastavi poziciu cursora
+void white() {
+    printf("\033[37m");
+}
+//sets the cursor position
 void setCursorPos(int x, int y)
 {
     printf("\033[%d;%dH", y, x);
