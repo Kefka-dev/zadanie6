@@ -53,7 +53,7 @@ void setCursorPos(int x, int y)
     printf("\033[%d;%dH", y, x);
 }
 
-//clearne terminal
+//clears the terminal
 void clearTerminal()
 {
     printf("\033[H\033[J");
