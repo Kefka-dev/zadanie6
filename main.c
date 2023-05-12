@@ -370,9 +370,29 @@ LOD lodeComputer[SHIP_COUNT]= {
 
 int main()
 {
-    char player1grid[GRID_SIZE][GRID_SIZE];
-    char player2grid[GRID_SIZE][GRID_SIZE];
+    char playerGrid[GRID_SIZE][GRID_SIZE];
+    char computerGrid[GRID_SIZE][GRID_SIZE];
     clearTerminal();
+    fillWithWater(playerGrid);
+    fillWithWater(computerGrid);
+    POSITION playerGridPosition = {1,2};
+    POSITION computerGridPosition = {61, 2};
+    printGrid(playerGrid, playerGridPosition);
+    rndBoatSpread(lodeComputer, computerGrid);
+    printGridWithFog(computerGrid, computerGridPosition);
+
+    setCursorPos(1,1);
+    printf("Your grid:");
+
+    setCursorPos(61,1);
+    printf("Computer grid:");
+
+    setCursorPos(30,20);
+    printf("Welcome! Please dont be too rough 🥺👉👈");
+    setCursorPos(30,21);
+    printf("For best expirience run on Linux.");
+    POSITION userSetPos, computerSetPos;
+    char orientation;
     
     //printf("%s", lodeHrac1[0].name);
 
