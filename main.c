@@ -132,9 +132,52 @@ void printGrid(char grid[GRID_SIZE][GRID_SIZE], /*POSITION *gridPos*/ POSITION g
     printf("\n");
 }
 
+//vypise grid zahaleny "hmlou" (lode niesu vidno)
+void printGridWithFog(char grid[GRID_SIZE][GRID_SIZE], /*POSITION *gridPos*/ POSITION gridPos)
+{
+    for (int rows = 0; rows < GRID_SIZE; rows++)
+    {
+        // setCursorPos((*gridPos).x, (*gridPos).y);
+        setCursorPos(gridPos.x, gridPos.y);
+        for (int cols = 0; cols < GRID_SIZE; cols++)
+        {
+            if(rows >0 && cols>0)
+            {
+               if (isdigit(grid[rows][cols]) != FALSE)
+               {
+                    blue();
+                    printf("[~]");
+               }
+               else if (grid[rows][cols] == '-')
+               {
+                    white();
+                    printf("[%c]", grid[rows][cols]);
+               }
+               else if (grid[rows][cols] == 'X')
+               {
+                    red();
+                    printf("[%c]", grid[rows][cols]);
+               }
+               else
+               {
+                    blue();
+                    printf("[%c]", grid[rows][cols]);
+               }
+               
+            }
+            else{
+                yellow();
+                printf("[%c]", grid[rows][cols]);
+            }
+            
+        }
+        reset();
+        // (*gridPos).y++;
+        gridPos.y++;
     }
     printf("\n");
 }
+
 // ak je lodka polozena na gride vrati 0, ak nie vrati 1
 int placeBoat(LOD *boatToPlace, POSITION wantedBridgePos, char orientation ,char grid[GRID_SIZE][GRID_SIZE])
 {
