@@ -8,6 +8,11 @@
 #define TRUE 1
 #define FALSE 0
 #define FAIL 1
+#define SHIP_DESTROYED 2
+
+#define SHIP_STATUS_LINE 15
+#define ERROR_LINE 13
+#define MAIN_IO_LINE 14
 typedef struct position
 {
     int x;
